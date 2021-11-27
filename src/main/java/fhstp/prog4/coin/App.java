@@ -7,7 +7,7 @@ public class App {
     	
     	System.out.println("hallo5");
     	
-    	System.out.println("hello from patrick");
+    	System.out.println("hello from patrick2");
     }
     
 }
