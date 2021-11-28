@@ -19,5 +19,6 @@ public class CoinTest {
     @Test
     public void newTestCase() {
         assertTrue(true);
-    }   
+    }
+    
 }
