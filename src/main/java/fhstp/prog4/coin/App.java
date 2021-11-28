@@ -16,7 +16,7 @@ public class App {
 			.limit(5)
 			.forEach(c1 -> System.out.println(c1));
     	} else {
-    		System.out.println("Failed to refresh CoinList!");
+    		System.out.println("Failed to refresh coinList!");
     	}
     	
     }
