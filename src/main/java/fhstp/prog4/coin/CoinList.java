@@ -46,6 +46,7 @@ public class CoinList {
 				return false;
 			}
 
+			
 			this.coinList = convertJsonToCoin(response.body());
 			return true;
 		} catch (IOException | InterruptedException e) {
@@ -66,11 +67,15 @@ public class CoinList {
 		for (Object o : coins) {
 			if (o instanceof JSONObject) {
 				try {
-					Coin c = new CoinBuilder(((JSONObject) o).getString("name"), ((JSONObject) o).getString("symbol"))
+					Coin c = new CoinBuilder(
+							((JSONObject) o).getString("name"), 
+							((JSONObject) o).getString("symbol"))
 							.priceUSD(((JSONObject) o).getJSONObject("quote").getJSONObject("USD").getDouble("price"))
 							.percentChange24(((JSONObject) o).getJSONObject("quote").getJSONObject("USD").getDouble("percent_change_24h"))
 							.build();
+					
 					coinl.add(c);
+					
 				} catch (JSONException | IllegalArgumentException jex) {
 					jex.printStackTrace();
 					System.out.println("Skip invalid object!");
