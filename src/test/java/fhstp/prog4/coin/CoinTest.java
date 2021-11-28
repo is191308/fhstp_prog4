@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import fhstp.prog4.coin.Coin.CoinBuilder;
 
+import static org.hamcrest.MatcherAssert.assertThat; 
+import static org.hamcrest.Matchers.*;
+
 public class CoinTest {
 
     
@@ -18,7 +21,7 @@ public class CoinTest {
     
     @Test
     public void newTestCase() {
-        assertTrue(true);
+    	assertThat(true, equalTo(true));
     }
     
     @Test
