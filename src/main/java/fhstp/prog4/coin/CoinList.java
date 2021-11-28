@@ -1,4 +1,5 @@
-//package at.ac.fhstp.toesch;
+package fhstp.prog4.coin;
+
 
 import java.io.IOException;
 //import java.net.Authenticator;
@@ -20,7 +21,7 @@ import java.time.Duration;
 public class CoinList {
 
 	
-   public static void main(String[] args) {
+   public static void test() {
 
 		final String apiKey = "31a76587-bd71-4b4c-968c-d8641a46b85f";
 		String uri =  "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
