@@ -47,7 +47,7 @@ public class Coin {
     	return false;
     }
 	
-    // Builder for Coin class
+    // Builder for Coin class (static inner class)
 	public static class CoinBuilder {
 		private final String name;
         private final String symbol;
