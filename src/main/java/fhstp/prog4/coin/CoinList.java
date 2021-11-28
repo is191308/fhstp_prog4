@@ -72,7 +72,6 @@ public class CoinList {
 							.build();
 					coinl.add(c);
 				} catch (JSONException | IllegalArgumentException jex) {
-					jex.printStackTrace();
 					System.out.println("Skip invalid object!");
 				}
 			}
