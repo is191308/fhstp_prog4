@@ -10,6 +10,7 @@ import fhstp.prog4.coin.Coin.CoinBuilder;
 
 public class CoinTest {
 
+    
     @Test
     public void testConstructor() {
     	assertTrue(true);
