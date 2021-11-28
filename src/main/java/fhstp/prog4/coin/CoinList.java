@@ -32,7 +32,7 @@ public class CoinList {
 	}
 	
 	
-	public boolean refreshCoinList() {
+	public boolean updateCoinList() {
 		final String uri = apiBaseURL + "/listings/latest";
 
 		try {
@@ -77,7 +77,6 @@ public class CoinList {
 					coinl.add(c);
 					
 				} catch (JSONException | IllegalArgumentException jex) {
-					jex.printStackTrace();
 					System.out.println("Skip invalid object!");
 				}
 			}
