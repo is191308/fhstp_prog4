@@ -32,7 +32,7 @@ public class CoinList {
 	}
 	
 	
-	public boolean refreshCoinList() {
+	public boolean updateCoinList() {
 		final String uri = apiBaseURL + "/listings/latest";
 
 		try {
