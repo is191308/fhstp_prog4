@@ -16,18 +16,22 @@ import org.json.JSONObject;
 import fhstp.prog4.coin.Coin.CoinBuilder;
 
 
-
-
-
-
 public class API {
 
 	public static final String apiBaseURL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency";
 	public static final String uri = apiBaseURL + "/listings/latest";
-	public static final String apiKey = "3a829e88-79c6-492d-817b-04c30543f9cd";
+	private String apiKey;
 	 
+	public API(String apiKey) {
+		if (apiKey == null || apiKey.length() != 36) {
+			throw new IllegalArgumentException("Invalid apiKey");
+		}
+		this.apiKey = apiKey;
+	}
 	
-	
+	public String getApiKey() {
+		return this.apiKey;
+	}
 	
 	public  JSONArray receiveJSON() {
 		

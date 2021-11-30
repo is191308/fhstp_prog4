@@ -36,36 +36,33 @@ public class Coin {
 	
 	
 	
-	
-// Builder for Coin class (static inner class)
-
-public static class CoinBuilder {
-	
-	private String symbol;
-	private double price;
-	private double percentage;
-	
-	
-	public CoinBuilder(String symbol) {
-		this.symbol = symbol;
-	}
-	
-	public CoinBuilder priceUSD(double price) {
-		this.price = price;
-		return this;
-	}
-	
-	public CoinBuilder percentage(double percentage) {
-		this.percentage = percentage;
-		return this;
-	}
-	
-	public Coin build() {
-		Coin coin = new Coin(this);
-		//validate
-		return coin;
-	}
-	
+	// Builder for Coin class (static inner class)
+	public static class CoinBuilder {
+		
+		private String symbol;
+		private double price;
+		private double percentage;
+		
+		
+		public CoinBuilder(String symbol) {
+			this.symbol = symbol;
+		}
+		
+		public CoinBuilder priceUSD(double price) {
+			this.price = price;
+			return this;
+		}
+		
+		public CoinBuilder percentage(double percentage) {
+			this.percentage = percentage;
+			return this;
+		}
+		
+		public Coin build() {
+			Coin coin = new Coin(this);
+			//validate
+			return coin;
+		}
 	
 	}
 

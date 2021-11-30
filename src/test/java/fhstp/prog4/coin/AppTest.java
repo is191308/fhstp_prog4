@@ -3,6 +3,7 @@ package fhstp.prog4.coin;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,8 +35,15 @@ public class AppTest {
     //Hamcrest
     @Test
     public void testValidApiKey() {
-        assertThat(36,is(API.apiKey.length()));
+    	API api = new API("9a999e99-99c6-999d-999b-99c9999999cd");
+        assertThat(36,is(api.getApiKey().length()));
         System.out.println("TEST PASSED: Key is valid");
+    }
+    
+    @Test
+    public void testInValidApiKey() {
+    	assertThrows(IllegalArgumentException.class, () -> new API("1-1-1-1-1"));
+        System.out.println("TEST PASSED: Key is invalid");
     }
 
     //Mockito
