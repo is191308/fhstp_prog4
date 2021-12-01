@@ -15,13 +15,15 @@ import java.util.Set;
 import java.io.IOException;
 import org.json.*;
 
-public class CoinList {
+
+
+public class CoinList {	
 	public static final String apiBaseURL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency";
 	private String apiKey;
 	private Set<Coin> coinList;
-
+	
 	public CoinList(String apiKey) {
-		if (apiKey == null) {
+		if (apiKey == null || apiKey.isEmpty()) {
 			throw new IllegalArgumentException("apiKey: null not allowed");
 		}
 		this.apiKey = apiKey;
@@ -31,6 +33,9 @@ public class CoinList {
 		return this.coinList;
 	}
 	
+	public String getApiKey() {
+		return this.apiKey;
+	}
 	
 	public boolean updateCoinList() {
 		final String uri = apiBaseURL + "/listings/latest";
