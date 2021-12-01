@@ -13,5 +13,6 @@ public class App {
     	} else {
     		System.out.println("Failed to refresh coinList!");
     	}
+    	
     }
 }
