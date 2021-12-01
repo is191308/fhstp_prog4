@@ -35,6 +35,7 @@ public class CoinTest {
     
     @Test
     public void testInValidApiKey() {
+    	assertThrows(IllegalArgumentException.class, () -> new CoinList(null));
     	assertThrows(IllegalArgumentException.class, () -> new CoinList(""));
         System.out.println("TEST PASSED: Key is invalid");
     }

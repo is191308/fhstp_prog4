@@ -124,7 +124,7 @@ public class CoinList {
 		}
 		return this.coinList.stream()
 				.sorted((c1, c2) -> Double.compare(c2.getPriceUSD(), c1.getPriceUSD()))
-				.toList();
+				.toList(); // req. Java 16
 	}
 	
 	/**
@@ -137,6 +137,6 @@ public class CoinList {
 		return this.coinList.stream()
 				.sorted((c1, c2) -> Double.compare(c2.getPercentChange24(), c1.getPercentChange24()))
 				.limit(5)
-				.toList();
+				.toList(); // req. Java 16
 	}
 }
