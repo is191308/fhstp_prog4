@@ -1,12 +1,7 @@
 package fhstp.prog4.coin;
 
 
-/**
- * Coin class
- * @author Stefan
- */
 public class Coin {
-
 	private String symbol;
 	private double price;
 	private double percentage;
@@ -14,13 +9,13 @@ public class Coin {
 	public Coin(CoinBuilder coinBuilder) {
 		this.symbol = coinBuilder.symbol;
 		this.price = coinBuilder.price;
-		this.percentage = coinBuilder.percentage;
+		this.percentage = coinBuilder.percentage_24;
 	}
 
 
 	@Override
 	public String toString() {
-		return "" + this.symbol + ": " + String.format("%.6f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
+		return "" + this.symbol + ": " + String.format("%.2f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
 	}
 
 	
@@ -45,7 +40,7 @@ public class Coin {
 		
 		private String symbol;
 		private double price;
-		private double percentage;
+		private double percentage_24;
 		
 		
 		public CoinBuilder(String symbol) {
@@ -58,7 +53,7 @@ public class Coin {
 		}
 		
 		public CoinBuilder percentage(double percentage) {
-			this.percentage = percentage;
+			this.percentage_24 = percentage;
 			return this;
 		}
 		
