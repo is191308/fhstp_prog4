@@ -71,6 +71,7 @@ public class AppTest {
     	
     	for(Coin coin : coinList) {
     		assertEquals("BTC", coin.getSymbol());
+    		assertEquals("BTC", coin.getSymbol());
     	  	assertEquals(54367.67567610061, coin.getPrice());
     	  	assertEquals(-1.1108174, coin.getPercentage());		
      	}

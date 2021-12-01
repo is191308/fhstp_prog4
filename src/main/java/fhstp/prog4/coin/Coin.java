@@ -2,11 +2,13 @@ package fhstp.prog4.coin;
 
 
 public class Coin {
+	private String name;
 	private String symbol;
 	private double price;
 	private double percentage;
 	
 	public Coin(CoinBuilder coinBuilder) {
+		this.name = coinBuilder.name;
 		this.symbol = coinBuilder.symbol;
 		this.price = coinBuilder.price;
 		this.percentage = coinBuilder.percentage_24;
@@ -15,9 +17,13 @@ public class Coin {
 
 	@Override
 	public String toString() {
-		return "" + this.symbol + ": " + String.format("%.2f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
+		return "" + this.name + " | " + this.symbol + ": " + String.format("%.2f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
 	}
 
+	
+	public String getName() {
+		return this.name;
+	}
 	
 	public String getSymbol() {
 		return this.symbol;
@@ -34,17 +40,34 @@ public class Coin {
 	}
 	
 	
+	@Override
+    public int hashCode() {
+    	return this.name.hashCode() + this.symbol.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj != null && obj.getClass() == Coin.class) {
+    		if (this.name.equals(((Coin)obj).name) && this.symbol.equals(((Coin)obj).symbol) && this.price == ((Coin)obj).price && this.percentage == ((Coin)obj).percentage) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+	
 	
 	// Builder for Coin class (static inner class)
 	public static class CoinBuilder {
 		
+		private String name;
 		private String symbol;
 		private double price;
 		private double percentage_24;
 		
 		
-		public CoinBuilder(String symbol) {
+		public CoinBuilder(String symbol, String name) {
 			this.symbol = symbol;
+			this.name = name;
 		}
 		
 		public CoinBuilder priceUSD(double price) {

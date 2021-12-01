@@ -65,12 +65,13 @@ public class API {
     	    	
   	    
     	for (Object o : jsonArray) {
+    		String name = ((JSONObject) o).getString("name");
     		String symbol = ((JSONObject) o).getString("symbol");
     		double price = ((JSONObject) o).getJSONObject("quote").getJSONObject("USD").getDouble("price");
     		double percentage = ((JSONObject) o).getJSONObject("quote").getJSONObject("USD").getDouble("percent_change_24h");
     		  		
     		//init & remember
-    		Coin c = new CoinBuilder(symbol)
+    		Coin c = new CoinBuilder(symbol, name)
     				.priceUSD(price)
     				.percentage(percentage)
     				.build();
