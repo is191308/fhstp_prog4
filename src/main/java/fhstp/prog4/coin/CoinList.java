@@ -11,32 +11,48 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.io.IOException;
 import org.json.*;
 
 
 
+/**
+ * @author Stefan
+ * CoinList class
+ */
 public class CoinList {	
 	public static final String apiBaseURL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency";
 	private String apiKey;
 	private Set<Coin> coinList;
 	
+	/**
+	 * creates a new CoinList instance
+	 * @param apiKey coinmarketcap api key
+	 */
 	public CoinList(String apiKey) {
 		if (apiKey == null || apiKey.isEmpty()) {
-			throw new IllegalArgumentException("apiKey: null not allowed");
+			throw new IllegalArgumentException("apiKey: null or empty not allowed");
 		}
 		this.apiKey = apiKey;
 	}
 
+	// coinList Getter
 	public Set<Coin> getCoinList() {
 		return this.coinList;
 	}
 	
+	// ApiKey Getter
 	public String getApiKey() {
 		return this.apiKey;
 	}
 	
+	
+	/**
+	 * updates the coinList object via coinmarketcap api
+	 * @return true if update was successfully, else false
+	 */
 	public boolean updateCoinList() {
 		final String uri = apiBaseURL + "/listings/latest";
 
@@ -48,19 +64,28 @@ public class CoinList {
 
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 			if (response.statusCode() != 200) {
+				System.err.println("Failed to retrive data from " + uri + ": " + response.statusCode());
 				return false;
 			}
 
-			
 			this.coinList = convertJsonToCoin(response.body());
 			return true;
 		} catch (IOException | InterruptedException e) {
 			System.err.println("Failed to retrive data from " + uri + ": " + e.getMessage());
 			return false;
+		} catch (IllegalArgumentException iex) {
+			System.err.println(iex.getMessage());
+			return false;
 		}
 	}
 
-	private Set<Coin> convertJsonToCoin(String jsonString) {
+	
+	/**
+	 * Helper method to convert jsonString to Set<Coin>
+	 * @param jsonString to convert
+	 * @return jsonString converted to Set<Coin>
+	 */
+	private static Set<Coin> convertJsonToCoin(String jsonString) {
 		Set<Coin> coinl = new HashSet<Coin>();
 		JSONArray coins = null;
 		try {
@@ -87,5 +112,31 @@ public class CoinList {
 			}
 		}
 		return coinl;
+	}
+	
+	
+	/**
+	 * @return list of coins sorted by price (asc)
+	 */
+	public List<Coin> getCoinListSortedByPrice() {
+		if (this.coinList == null) {
+			return null;
+		}
+		return this.coinList.stream()
+				.sorted((c1, c2) -> Double.compare(c2.getPriceUSD(), c1.getPriceUSD()))
+				.toList();
+	}
+	
+	/**
+	 * @return top five movers as list of coins
+	 */
+	public List<Coin> getCoinListTopMover() {
+		if (this.coinList == null) {
+			return null;
+		}
+		return this.coinList.stream()
+				.sorted((c1, c2) -> Double.compare(c2.getPercentChange24(), c1.getPercentChange24()))
+				.limit(5)
+				.toList();
 	}
 }
