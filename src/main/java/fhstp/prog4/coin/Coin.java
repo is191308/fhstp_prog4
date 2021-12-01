@@ -1,6 +1,10 @@
 package fhstp.prog4.coin;
 
-// Coin
+
+/**
+ * @author Stefan
+ * Simple Coin class
+ */
 public class Coin {
 	private String name;
 	private String symbol;
@@ -64,10 +68,12 @@ public class Coin {
             this.name = name;
             this.symbol = symbol;
         }
+        
         public CoinBuilder priceUSD(double price_usd) {
             this.price_usd = price_usd;
             return this;
         }
+        
         public CoinBuilder percentChange24(double percent_change_24h) {
             this.percent_change_24h = percent_change_24h;
             return this;
