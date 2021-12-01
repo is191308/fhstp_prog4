@@ -1,5 +1,9 @@
 package fhstp.prog4.coin;
 
+/**
+ * @author Berger Stefan, Oberndorfer Patrick, Toesch Bernhard
+ * Simple Coin class
+ */
 
 public class Coin {
 	private String name;
@@ -14,13 +18,6 @@ public class Coin {
 		this.percentage = coinBuilder.percentage_24;
 	}
 
-
-	@Override
-	public String toString() {
-		return "" + this.name + " | " + this.symbol + ": " + String.format("%.2f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
-	}
-
-	
 	public String getName() {
 		return this.name;
 	}
@@ -39,6 +36,11 @@ public class Coin {
 		return this.percentage;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "" + this.name + " | " + this.symbol + ": " + String.format("%.2f", this.price) + " USD (" + String.format("%.2f", this.percentage) +" % since 24h)";
+	}
 	
 	@Override
     public int hashCode() {
@@ -66,6 +68,14 @@ public class Coin {
 		
 		
 		public CoinBuilder(String symbol, String name) {
+			
+        	if (name == null || name.isEmpty() || name.trim().isEmpty()) {
+        		throw new IllegalArgumentException("name is empty");
+        	}
+        	if (symbol == null || symbol.isEmpty() || symbol.trim().isEmpty()) {
+        		throw new IllegalArgumentException("symbol is empty");
+        	}
+			
 			this.symbol = symbol;
 			this.name = name;
 		}
@@ -82,10 +92,18 @@ public class Coin {
 		
 		public Coin build() {
 			Coin coin = new Coin(this);
-			// validate 
+			validateCoin(coin);
 			return coin;
 		}
 	
+        private void validateCoin(Coin user) {
+            if (price < 0) {
+            	throw new IllegalArgumentException("price_usd less than zero");
+            }
+        }
+        
+        
+        
 	}
 
 }

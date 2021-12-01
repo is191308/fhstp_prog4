@@ -1,7 +1,12 @@
 package fhstp.prog4.coin;
 
+/**
+ * @author Berger Stefan, Oberndorfer Patrick, Toesch Bernhard
+ * App Class
+ */
 
 import java.util.Set;
+
 import org.json.JSONArray;
 
 

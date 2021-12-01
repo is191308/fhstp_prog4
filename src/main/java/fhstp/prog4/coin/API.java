@@ -1,5 +1,9 @@
 package fhstp.prog4.coin;
 
+/**
+ * @author Berger Stefan, Oberndorfer Patrick, Toesch Bernhard
+ * API Class
+ */
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import fhstp.prog4.coin.Coin.CoinBuilder;
@@ -33,7 +38,7 @@ public class API {
 		return this.apiKey;
 	}
 	
-	public  JSONArray receiveJSON() {
+	public JSONArray receiveJSON() {
 		
 		try {
 			HttpClient client = HttpClient.newBuilder().build();
@@ -63,7 +68,8 @@ public class API {
     public static Set<Coin> convertJSONToCoin(JSONArray jsonArray) {
     	Set<Coin> coinList = new HashSet<Coin>();
     	    	
-  	    
+    	try {
+    	
     	for (Object o : jsonArray) {
     		String name = ((JSONObject) o).getString("name");
     		String symbol = ((JSONObject) o).getString("symbol");
@@ -77,9 +83,12 @@ public class API {
     				.build();
     		
     		
-    		coinList.add(c);
-    		
+    		coinList.add(c);	
     	}
+    	
+    	} catch (JSONException | IllegalArgumentException jex) {
+			System.out.println("Skip invalid object!");
+		}
     	
     	return coinList;
     }
